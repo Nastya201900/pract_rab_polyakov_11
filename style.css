@@ -1,0 +1,35 @@
+table.sport td {
+  text-align: center;
+}
+
+table.sport td.left {
+  text-align: left;
+}
+
+span.header {
+  color: white;
+  font-family: sans-serif;
+  font-weight: bolder;
+  background: url(images/back.jpg);
+}
+
+img.picture {
+  background: url(images/paper.jpg);
+  width: 120px;
+  height: 120px;
+  padding: 10px;
+  display: block;
+}
+
+span.note {
+  font-family: Arial;
+  color: #800000;
+  text-align: center;
+  padding: 5px 10px 10px 5px;
+}
+
+.ad {
+  border: 1px solid #CCCCCC;
+  background: rgb(230, 230, 255);
+  align: center;
+}
