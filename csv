@@ -1,0 +1,42 @@
+import csv
+
+array, sr, summ = [], {}, {}
+summ["subject_1"], summ["subject_2"], summ["subject_3"], summ["subject_4"] = 0, 0, 0, 0
+sr["subject_1"], sr["subject_2"], sr["subject_3"], sr["subject_4"] = 0, 0, 0, 0
+i, mark_2, max_value = 0, 0, 0
+
+with open("marks.csv") as f:
+    reader = csv.reader(f, delimiter=",")
+    for row in reader:
+        user_summ = int(row[2]) + int(row[3]) + int(row[4]) + int(row[5])
+        obj = {"first_name": row[0], "last_name": row[1], "subject_1": int(row[2]), "subject_2": int(row[3]),
+               "subject_3": int(row[4]), "subject_4": int(row[5]), "summary": user_summ}
+        array.append(obj)
+
+        if obj["summary"] > max_value:
+            max_value = obj["summary"]
+
+        if obj["subject_1"] == 2 or obj["subject_2"] == 2 or obj["subject_3"] == 2 or obj["subject_4"] == 2:
+            mark_2 += 1
+
+        summ["subject_1"] += int(obj["subject_1"])
+        summ["subject_2"] += int(obj["subject_2"])
+        summ["subject_3"] += int(obj["subject_3"])
+        summ["subject_4"] += int(obj["subject_4"])
+        i += 1
+
+sr["subject_1"] = summ["subject_1"] / len(array)
+sr["subject_2"] = summ["subject_2"] / len(array)
+sr["subject_3"] = summ["subject_3"] / len(array)
+sr["subject_4"] = summ["subject_4"] / len(array)
+with open("result.csv", mode="w") as f:
+    writer = csv.writer(f, delimiter=",", lineterminator="\r")
+    writer.writerow(["", "Предмет 1", "Предмет 2", "Предмет 3", "Предмет 4"])
+    writer.writerow(["Среднее значение баллов", sr["subject_1"], sr["subject_2"], sr["subject_3"], sr["subject_4"]])
+    writer.writerow([])
+    writer.writerow(["Получили 2", mark_2])
+    writer.writerow([])
+    writer.writerow(["Фамилия", "Имя", "Сумма баллов"])
+    for el in array:
+        if el["summary"] == max_value:
+            writer.writerow([el["first_name"], el["last_name"], el["summary"]])
