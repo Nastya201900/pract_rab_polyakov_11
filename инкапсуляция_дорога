@@ -1,0 +1,34 @@
+class TCar:
+    def __init__(self, road0, p0, v0):
+        self.__road = road0
+        self.__p = p0
+        self.__v = v0
+        self.__x = 0
+    def move(self):
+        self.__x += self.__v
+        if self.__x > self.__road.getLength():
+            self.__x = 0
+    def getX(self):        return self.__x
+
+class TRoad:
+    def __init__(self, length0, width0):
+        if length0 > 0:            self.__length = length0
+        else:
+            self.__length = 0
+            if width0 > 0:
+                self.__width = width0
+            else:
+                self.__width = 0
+    def getLength(self):        return self.__length
+
+road = TRoad(60, 3)
+n = 3
+cars = []
+for i in range(n):
+    cars.append(TCar(road, i + 1, 2 * (i + 1)))
+for k in range(100):
+    for i in range(n):
+        cars[i].move()
+print('100 шагов:')
+for i in range(n):
+    print(cars[i].getX())
